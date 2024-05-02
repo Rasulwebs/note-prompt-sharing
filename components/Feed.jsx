@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
+import axios from "axios";
+import Spinner from "./Spinner";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -20,6 +22,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [allPosts, setAllPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // Search states
   const [searchText, setSearchText] = useState("");
@@ -27,9 +30,12 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
-    const data = await response.json();
+    setLoading(true);
+    const { data } = await axios.get("/api/prompt");
 
+    if (!data) setLoading(true);
+
+    setLoading(false);
     setAllPosts(data);
   };
 
@@ -86,6 +92,8 @@ const Feed = () => {
           data={searchedResults}
           handleTagClick={handleTagClick}
         />
+      ) : loading ? (
+        <Spinner />
       ) : (
         <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
       )}

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
+import axios from "axios";
 
 const MyProfile = () => {
   const router = useRouter();
@@ -14,8 +15,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`);
-      const data = await response.json();
+      const { data } = await axios.get(`/api/users/${session?.user.id}/posts`);
 
       setMyPosts(data);
     };
@@ -34,9 +34,7 @@ const MyProfile = () => {
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
-          method: "DELETE",
-        });
+        await axios.delete(`/api/prompt/${post._id.toString()}`);
 
         const filteredPosts = myPosts.filter((item) => item._id !== post._id);
 

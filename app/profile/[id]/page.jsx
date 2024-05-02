@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
+import axios from "axios";
 
 const UserProfile = ({ params }) => {
   const searchParams = useSearchParams();
@@ -13,8 +14,7 @@ const UserProfile = ({ params }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${params?.id}/posts`);
-      const data = await response.json();
+      const { data } = await axios.get(`/api/users/${params?.id}/posts`);
 
       setUserPosts(data);
     };
