@@ -20,6 +20,8 @@ const RootLayout = ({ children }) => (
         <main className='app'>
           <Nav />
           {children}
+        </main>
+      </Provider>
           <ToastContainer
             position='top-center'
             autoClose={2000}
@@ -33,8 +35,6 @@ const RootLayout = ({ children }) => (
             theme='colored'
             transition={"Bounce"}
           />
-        </main>
-      </Provider>
     </body>
   </html>
 );
