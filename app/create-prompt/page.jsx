@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios"; // Axios ni import qilish
 
 import Form from "@components/Form";
+import { toast } from "react-toastify";
 
 const CreatePrompt = () => {
   const router = useRouter();
@@ -30,8 +31,12 @@ const CreatePrompt = () => {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong!");
     } finally {
       setIsSubmitting(false);
+
+      setPost({ prompt: "", tag: "" });
+      toast.success("Prompt created successfully!");
     }
   };
 

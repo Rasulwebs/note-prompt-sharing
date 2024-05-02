@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const UpdatePrompt = () => {
   const router = useRouter();
@@ -44,8 +45,12 @@ const UpdatePrompt = () => {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
     } finally {
       setIsSubmitting(false);
+
+      setPost({ prompt: "", tag: "" });
+      toast.success("Prompt updated successfully");
     }
   };
 

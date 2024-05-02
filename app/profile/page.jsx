@@ -6,17 +6,22 @@ import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const MyProfile = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
   const [myPosts, setMyPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       const { data } = await axios.get(`/api/users/${session?.user.id}/posts`);
 
+      if (!data) setLoading(true);
+
+      setLoading(false);
       setMyPosts(data);
     };
 
@@ -39,8 +44,10 @@ const MyProfile = () => {
         const filteredPosts = myPosts.filter((item) => item._id !== post._id);
 
         setMyPosts(filteredPosts);
+        toast.success("Prompt deleted successfully");
       } catch (error) {
         console.log(error);
+        toast.error("Something went wrong");
       }
     }
   };
@@ -52,6 +59,7 @@ const MyProfile = () => {
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
+      loading={loading}
     />
   );
 };

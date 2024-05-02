@@ -1,6 +1,7 @@
 import PromptCard from "./PromptCard";
+import Spinner from "./Spinner";
 
-const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
+const Profile = ({ name, desc, loading, data, handleEdit, handleDelete }) => {
   return (
     <section className='w-full'>
       <h1 className='head_text text-left'>
@@ -9,14 +10,18 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
       <p className='desc text-left'>{desc}</p>
 
       <div className='mt-10 prompt_layout'>
-        {data.map((post) => (
-          <PromptCard
-            key={post._id}
-            post={post}
-            handleEdit={() => handleEdit && handleEdit(post)}
-            handleDelete={() => handleDelete && handleDelete(post)}
-          />
-        ))}
+        {loading ? (
+          <Spinner />
+        ) : (
+          data.map((post) => (
+            <PromptCard
+              key={post._id}
+              post={post}
+              handleEdit={() => handleEdit && handleEdit(post)}
+              handleDelete={() => handleDelete && handleDelete(post)}
+            />
+          ))
+        )}
       </div>
     </section>
   );
