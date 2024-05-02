@@ -11,11 +11,16 @@ const UserProfile = ({ params }) => {
   const userName = searchParams.get("name");
 
   const [userPosts, setUserPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true);
       const { data } = await axios.get(`/api/users/${params?.id}/posts`);
 
+      if (!data) setLoading(true);
+
+      setLoading(false);
       setUserPosts(data);
     };
 
@@ -27,6 +32,7 @@ const UserProfile = ({ params }) => {
       name={userName}
       desc={`Welcome to ${userName}'s personalized profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination`}
       data={userPosts}
+      loading={loading}
     />
   );
 };

@@ -17,6 +17,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true);
       const { data } = await axios.get(`/api/users/${session?.user.id}/posts`);
 
       if (!data) setLoading(true);
