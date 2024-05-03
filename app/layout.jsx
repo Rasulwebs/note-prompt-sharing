@@ -3,6 +3,7 @@ import "@styles/globals.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "Promptopia",
@@ -18,10 +19,6 @@ const RootLayout = ({ children }) => (
         </div>
 
         <main className='app'>
-          <Nav />
-          {children}
-        </main>
-      </Provider>
           <ToastContainer
             position='top-center'
             autoClose={2000}
@@ -33,8 +30,11 @@ const RootLayout = ({ children }) => (
             draggable
             pauseOnHover
             theme='colored'
-            transition={"Bounce"}
           />
+          <Nav />
+          {children}
+        </main>
+      </Provider>
     </body>
   </html>
 );
