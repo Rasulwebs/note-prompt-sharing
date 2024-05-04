@@ -31,12 +31,15 @@ const Feed = () => {
 
   const fetchPosts = async () => {
     setLoading(true);
-    const { data } = await axios.get("/api/prompt");
-
-    if (!data) setLoading(true);
-
-    setLoading(false);
-    setAllPosts(data);
+    try {
+      const { data } = await axios.get("/api/prompt");
+      setAllPosts(data);
+    } catch (error) {
+      window.location.reload();
+      console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {

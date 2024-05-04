@@ -4,6 +4,7 @@ import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Promptopia",
@@ -35,6 +36,8 @@ const RootLayout = ({ children }) => (
           {children}
         </main>
       </Provider>
+
+      <Analytics />
     </body>
   </html>
 );
