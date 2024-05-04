@@ -5,6 +5,7 @@ import Provider from "@components/Provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: "Promptopia",
@@ -36,7 +37,7 @@ const RootLayout = ({ children }) => (
           {children}
         </main>
       </Provider>
-
+      <SpeedInsights />
       <Analytics />
     </body>
   </html>
