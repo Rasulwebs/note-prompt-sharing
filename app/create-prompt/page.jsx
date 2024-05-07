@@ -16,16 +16,7 @@ const CreatePrompt = () => {
   const [post, setPost] = useState({ prompt: "", tag: "" });
 
   const notifySuccess = () =>
-    toast.success("Prompt created successfully!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+    toast.success("Prompt created successfully!");
 
   const createPrompt = async (e) => {
     e.preventDefault();
