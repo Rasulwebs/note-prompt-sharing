@@ -18,7 +18,7 @@ const CreatePrompt = () => {
   const notifySuccess = () =>
     toast.success("Prompt created successfully!", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -39,8 +39,8 @@ const CreatePrompt = () => {
       });
 
       if (response.status === 201) {
+        notifySuccess();
         router.push("/");
-        toast.success("Prompt created successfully!");
       }
     } catch (error) {
       console.log(error);
