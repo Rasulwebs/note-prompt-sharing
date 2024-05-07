@@ -38,8 +38,9 @@ const CreatePrompt = () => {
         tag: post.tag,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         router.push("/");
+        toast.success("Prompt created successfully!");
       }
     } catch (error) {
       console.log(error);
@@ -48,7 +49,6 @@ const CreatePrompt = () => {
       setIsSubmitting(false);
 
       setPost({ prompt: "", tag: "" });
-      toast.success("Prompt created successfully!");
     }
   };
 
