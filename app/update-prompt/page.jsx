@@ -49,7 +49,6 @@ const UpdatePrompt = () => {
     } finally {
       setIsSubmitting(false);
 
-      setPost({ prompt: "", tag: "" });
       toast.success("Prompt updated successfully");
     }
   };
